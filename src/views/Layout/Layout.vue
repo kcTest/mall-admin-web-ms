@@ -1,16 +1,25 @@
 <template>
   <div>
-    <app-main></app-main>
+    <SideBar></SideBar>
+    <div>
+      <nav-bar></nav-bar>
+      <app-main></app-main>
+    </div>
   </div>
+
 </template>
 
 <script>
 
-import {AppMain} from "./components";
+import {AppMain, NavBar, SideBar} from "./components";
 
 export default {
   name: "Layout",
-  components: {AppMain}
+  components: {
+    AppMain,
+    NavBar,
+    SideBar
+  }
 }
 </script>
 
