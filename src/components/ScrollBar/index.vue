@@ -1,5 +1,6 @@
 <template>
   <div class="scroll-container" ref="scrollContainer" @wheel.prevent="handleScroll">
+    scrollbar
     <div class="scroll-wrapper" ref="scrollWrapper" :style="{top: top+'px'}">
       <slot></slot>
     </div>
@@ -16,14 +17,14 @@ export default {
   },
   methods: {
     handleScroll() {
-      
+
     }
   }
 }
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-@import '../../styles/variables';
+@import 'src/styles/variables';
 
 .scroll-container {
   position: relative;

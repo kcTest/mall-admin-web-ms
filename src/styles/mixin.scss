@@ -1,0 +1,31 @@
+//清除浮动
+@mixin clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+//::-webkit-scrollbar 仅仅在支持WebKit的浏览器 (例如, 谷歌Chrome, 苹果Safari)可以使用.
+@mixin scrollbar {
+  // 滚动条没有滑块的轨道部分.
+  &::-webkit-scrollbar-track-piece {
+    background: #d3dce6;
+  }
+  //整个滚动条.
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  //滚动条上的滚动滑块.
+  &::-webkit-scrollbar-thumb {
+    background: #99a9bf;
+    border-radius: 20px;
+  }
+}
+
+@mixin relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}

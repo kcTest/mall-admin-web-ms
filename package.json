@@ -1,6 +1,7 @@
 {
   "name": "mall-admin-web-ms",
   "version": "0.1.0",
+  "description": "mall后台管理前端",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,6 +12,8 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.15.6",
     "js-cookie": "^3.0.1",
+    "node-sass": "^7.0.1",
+    "normalize.css": "^8.0.1",
     "vue": "^2.6.11",
     "vuex": "^3.6.2"
   },
@@ -21,8 +24,10 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "sass-loader": "^7.0.1",
     "vue-router": "^3.5.3",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "webpack-cli": "^4.9.2"
   },
   "eslintConfig": {
     "root": true,
@@ -37,6 +42,10 @@
       "parser": "babel-eslint"
     },
     "rules": {}
+  },
+  "engines": {
+    "node": ">= 16.0.0",
+    "npm": ">=3.0.0"
   },
   "browserslist": [
     "> 1%",

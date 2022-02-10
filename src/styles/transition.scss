@@ -1,0 +1,33 @@
+//属性过渡效果
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.28s ease 0s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
+//面包屑导航栏
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+  transition: all 0.5s;
+}
+
+.breadcrumb-enter,
+.breadcrumb-leave-active {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.breadcrumb-move {
+  transition: all 0.5s;
+}
+
+.breadcrumb-leave-active {
+  position: absolute;
+}
+
+

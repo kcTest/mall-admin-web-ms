@@ -1,5 +1,7 @@
 <template>
-  <div>NarBar</div>
+  <el-menu class="navbar" mode="horizontal">
+
+  </el-menu>
 </template>
 
 <script>
