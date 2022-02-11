@@ -8,7 +8,7 @@ export default {
     watch: {
         $route: function () {
             if (this.device == 'mobile' && this.sidebar.opened) {
-                store.dispatch('CloseSideBar', {withoutAnimation: false});
+                store.dispatch('CloseSidebar', {withoutAnimation: false});
             }
         },
         beforeMount() {
@@ -25,7 +25,7 @@ export default {
                 const isMobile = this.isMobile();
                 store.dispatch('ToggleDevice', isMobile ? 'mobile' : 'desktop');
                 if (isMobile) {
-                    store.dispatch('CloseSideBar', {withoutAnimation: true})
+                    store.dispatch('CloseSidebar', {withoutAnimation: true})
                 }
             }
         }

@@ -107,19 +107,21 @@ a:hover {
   color: #303133;
 }
 
+$color-msg:#606266;
+
 .font-medium {
   font-size: 16px;
-  color: #606266;
+  color: $color-msg;
 }
 
 .font-small {
   font-size: 14px;
-  color: #606266;
+  color: $color-msg;
 }
 
 .font-extra-small {
   font-size: 13px;
-  color: #606266;
+  color: $color-msg;
 }
 
 .color-main {
@@ -128,6 +130,10 @@ a:hover {
 
 .color-info {
   color: #909399;
+}
+
+.color-info2 {
+  color: $color-msg;
 }
 
 .color-success {
@@ -141,4 +147,5 @@ a:hover {
 .color-danger {
   color: #f56c6c;
 }
+
 

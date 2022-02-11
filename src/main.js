@@ -1,7 +1,11 @@
 import Vue from 'vue'
+
 import ElementUI from 'element-ui'
+//主题
+import '@/styles/element-variables.scss'
+//国际化
 import locale from 'element-ui/lib/locale/lang/en';
-//css重置
+
 import 'normalize.css/normalize.css'
 import '@/styles/index.scss'
 

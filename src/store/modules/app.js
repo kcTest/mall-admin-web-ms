@@ -9,11 +9,14 @@ const app = {
         device: 'desktop'
     },
     actions: {
-        CloseSideBar: function (context, value) {
+        CloseSidebar: function (context, value) {
             context.commit('CLOSE_SIDEBAR', value.withoutAnimation);
         },
         ToggleDevice: function (context, value) {
             context.commit('TOGGLE_DEVICE', value.withoutAnimation);
+        },
+        ToggleSidebar: function (context) {
+            context.commit('TOGGLE_SIDEBAR')
         }
     },
     mutations: {
@@ -24,6 +27,10 @@ const app = {
         },
         TOGGLE_DEVICE: function (state, value) {
             state.device = value;
+        },
+        TOGGLE_SIDEBAR: function (state) {
+            state.sidebar.opened ? Cookie.set('sidebarStatus', 1) : Cookie.set('sidebarStatus', 0);
+            state.sidebar.opened = !state.sidebar.opened;
         }
     }
 }

@@ -10,16 +10,15 @@ export const constantRouteMap = [
         path: '',
         component: Layout,
         redirect: '/home',
-        children: [
-            {
-                path: 'home',
-                name: 'home',
-                component: () => import('@/views/home/index'),
-                mata: {title: '首页', icon: 'home'}
-            }
-        ]
+        children: [{
+            path: 'home',
+            name: 'home',
+            component: () => import('@/views/home/index'),
+            mata: {title: '首页', icon: 'home'}
+        }]
     },
     {path: '/login', component: () => import('@/views/login/index'), hidden: true},
+    {path: '/404', component: () => import('@/views/404'), hidden: true}
 ]
 
 export default new Router({
