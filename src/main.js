@@ -5,6 +5,8 @@ import ElementUI from 'element-ui'
 import '@/styles/element-variables.scss'
 //国际化
 import locale from 'element-ui/lib/locale/lang/en';
+//图表
+import VCharts from 'v-charts'
 
 import 'normalize.css/normalize.css'
 import '@/styles/index.scss'
@@ -15,6 +17,7 @@ import router from './router'
 import store from './store'
 
 Vue.use(ElementUI, {locale})
+Vue.use(VCharts)
 
 Vue.config.productionTip = false
 
