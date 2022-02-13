@@ -80,6 +80,7 @@ export default {
       .user-avatar {
         width: 40px;
         height: 40px;
+        border-radius: 10px;
       }
 
       .el-icon-caret-bottom {

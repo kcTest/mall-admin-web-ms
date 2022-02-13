@@ -3,9 +3,11 @@ import Router from 'vue-router'
 
 Vue.use(Router);
 
-import Layout from '@/views/Layout/Layout'
+import Layout from '@/views/layout/Layout'
 
-export const constantRouteMap = [
+export const constantRouterMap = [
+    {path: '/login', component: () => import('@/views/login/index'), hidden: true},
+    {path: '/404', component: () => import('@/views/404'), hidden: true},
     {
         path: '',
         component: Layout,
@@ -16,13 +18,11 @@ export const constantRouteMap = [
             component: () => import('@/views/home/index'),
             mata: {title: '首页', icon: 'home'}
         }]
-    },
-    {path: '/login', component: () => import('@/views/login/index'), hidden: true},
-    {path: '/404', component: () => import('@/views/404'), hidden: true}
+    }
 ]
 
 export default new Router({
     scrollBehavior: () => ({y: 0}),
-    routes: constantRouteMap
+    routes: constantRouterMap
 })
 

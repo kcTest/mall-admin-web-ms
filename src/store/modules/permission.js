@@ -1,8 +1,8 @@
-import {constantRouteMap} from '@/router/index'
+import {constantRouterMap} from '@/router/index'
 
 const permission = {
     state: {
-        routers: constantRouteMap,
+        routers: constantRouterMap,
     }
 }
 
