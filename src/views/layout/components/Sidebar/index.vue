@@ -21,6 +21,7 @@ export default {
       'routers'
     ]),
     routes() {
+      console.log('$$$$$$$$$$$$$$$$$$$$$$$$$');
       return this.routers;
     },
     isCollapse() {
