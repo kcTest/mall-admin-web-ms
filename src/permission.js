@@ -1,21 +1,39 @@
 import router from './router'
 import store from './store'
-import NProgress from 'nprogress'
 import {getToken} from "@/utils/auth";
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+import {Message} from "element-ui";
 
 const whiltList = ['/login']
 router.beforeEach((to, from, next) => {
     NProgress.start();
     if (getToken()) {
-        if (to.path === 'login') {
+        if (to.path === '/login') {
             next({path: '/'});
             NProgress.done();
         } else {
             if (store.getters.roles.length === 0) {
                 store.dispatch('GetInfo').then(res => {
-                    console.log(res);
+                    let menus = res.data.menus;
+                    let username = res.data.username;
+                    //生成路由表
+                    store.dispatch('GenerateRoutes', {menus, username})
+                        .then(() => {
+                            //添加路由表
+                            router.addRoutes(store.getters.addRouters);
+                            next({...to, replace: true});
+                        }).catch(err => {
+                        console.log(err);
+                    });
                 }).catch((err) => {
-                    console.log(err);
+                    store.dispatch('FedLogOut')
+                        .then(() => {
+                            Message.error(err.message || 'Verification failed, please login again');
+                            next({path: '/'});
+                        }).catch(err => {
+                        console.log(err);
+                    });
                 })
             } else {
                 next();

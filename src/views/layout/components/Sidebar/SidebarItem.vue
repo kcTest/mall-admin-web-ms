@@ -1,7 +1,7 @@
 <template>
   <div class="menu-wrapper">
     <template v-for="item in shouldShowRoutes">
-      <!--不含子菜单的一级菜单 （首页）-->
+      <!--只有一个子菜单的一级菜单 （首页）-->
       <router-link v-if="hasOneShowingChildren(item.children)&&!item.children[0].children
       &&!item.alwaysShow" :to="item.path+'/'+item.children[0].path" :key="item.children[0].name">
         <el-menu-item :index="item.path+'/'+item.children[0].path" :class="{'submenu-item-noDropdown':!isNest}">
@@ -48,6 +48,8 @@ export default {
           item.children = item.children.filter(son => !son.hidden)
         }
       }
+      console.log('$$$$$$$$$$$$$$$$$$$$$$$$$shouldShowRoutes');
+      console.log(ret);
       return ret;
     }
   },

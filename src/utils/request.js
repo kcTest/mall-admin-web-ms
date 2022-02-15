@@ -6,7 +6,7 @@ import {getToken} from '@/utils/auth'
 
 //  创建axios实例
 const service = axios.create({
-    baseURL: process.env.BASE_API_URL,
+    baseURL: process.env.VUE_APP_BASE_API,
     timeout: 15000
 })
 
@@ -53,7 +53,7 @@ service.interceptors.response.use(
     }
     ,
     error => {
-        console.log('error');
+        console.log(error);
         Message({
             message: error.message,
             type: 'error',
