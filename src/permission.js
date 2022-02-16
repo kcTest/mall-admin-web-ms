@@ -23,17 +23,13 @@ router.beforeEach((to, from, next) => {
                             //添加路由表
                             router.addRoutes(store.getters.addRouters);
                             next({...to, replace: true});
-                        }).catch(err => {
-                        console.log(err);
-                    });
+                        });
                 }).catch((err) => {
                     store.dispatch('FedLogOut')
                         .then(() => {
                             Message.error(err.message || 'Verification failed, please login again');
                             next({path: '/'});
-                        }).catch(err => {
-                        console.log(err);
-                    });
+                        });
                 })
             } else {
                 next();

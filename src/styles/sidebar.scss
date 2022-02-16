@@ -18,7 +18,7 @@
     width: 180px !important;
     height: 100%;
     position: fixed;
-    font-size: 0px;
+    font-size: 0;
     top: 0;
     bottom: 0;
     left: 0;
@@ -61,7 +61,7 @@
     }
 
     .el-submenu {
-      & > el-submenu__title {
+      & > .el-submenu__title {
         padding-left: 10px !important;
 
         & > span {
@@ -81,7 +81,7 @@
   }
 
   .sidebar-container .nest-menu .el-submenu > .el-submenu__title,
-  .sidebar-container .el-submenu .el-submenu-item {
+  .sidebar-container .el-submenu .el-menu-item {
 
     min-width: 180px !important;
     background-color: $subMenuBg !important;
@@ -113,7 +113,7 @@
 
       .sidebar-container {
         transition-duration: 0.3s;
-        transform: translate3d(180px, 0, 0);
+        transform: translate3d(-180px, 0, 0);
       }
 
     }

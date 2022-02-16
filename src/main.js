@@ -4,7 +4,7 @@ import ElementUI from 'element-ui'
 //主题
 import '@/styles/element-variables.scss'
 //国际化
-import locale from 'element-ui/lib/locale/lang/en';
+import locale from 'element-ui/lib/locale/lang/zh-CN';
 //图表
 import VCharts from 'v-charts'
 

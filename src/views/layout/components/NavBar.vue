@@ -5,7 +5,7 @@
     <breadcrumb></breadcrumb>
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
-        <img class="user-avatar" :src="avatar"/>
+        <img class="user-avatar" :src="avatar" alt=""/>
         <i class="el-icon-caret-bottom"></i>
       </div>
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
@@ -40,13 +40,12 @@ export default {
   },
   methods: {
     toggleSidebar: function () {
-      this.$store.dispatch('ToggleSideBar')
+      this.$store.dispatch('ToggleSidebar')
     },
     logout: function () {
-      this.$store.dispatch('LogOut').then()
-      {
-        location.reload()
-      }
+      this.$store.dispatch('LogOut').then(() => {
+        location.reload();
+      });
     }
   }
 }
@@ -57,12 +56,12 @@ export default {
 .navbar {
   height: 50px;
   line-height: 50px;
-  border-radius: 0px !important;
+  border-radius: 0 !important;
 
   .hamburger-container {
     float: left;
     height: 50px;
-    line-height: 50px;
+    line-height: 58px;
     padding: 0 10px;
   }
 

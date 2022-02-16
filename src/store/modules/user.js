@@ -1,5 +1,5 @@
 import {getToken, setToken, removeToken} from "@/utils/auth";
-import {login, getInfo} from "@/api/login";
+import {login, getInfo, logout} from "@/api/login";
 
 const user = {
     state: {
@@ -27,6 +27,18 @@ const user = {
                     reject(error);
                 })
             })
+        },
+        LogOut: function ({commit}) {
+            return new Promise((resolve, reject) => {
+                logout().then(() => {
+                    commit('SET_TOKEN', '');
+                    commit('SET_ROLES', []);
+                    removeToken();
+                    resolve();
+                }).catch(error => {
+                    reject(error);
+                });
+            });
         },
         FedLogOut: function (context) {
             return new Promise(resolve => {
