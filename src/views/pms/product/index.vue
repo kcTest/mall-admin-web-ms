@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-card class="filter-container" shadow="never">
       <div>
-        <i class="el-icon-search"></i>
+        <i class="el-icon-search" style="margin-right: 4px"></i>
         <span>筛选搜索</span>
         <el-button style="float: right" @click="handleSearchList" type="primary" size="small">查询结果</el-button>
         <el-button style="float: right;margin-right: 15px" @click="handleResetSearch" size="small">重置</el-button>
@@ -16,22 +16,23 @@
             <el-input style="width: 203px" v-model="listQuery.productSn" placeholder="商品货号"></el-input>
           </el-form-item>
           <el-form-item label="商品分类：">
-            <el-cascader clearable v-model="selectProductCateValue" :options="productCateOptions"></el-cascader>
+            <el-cascader style="width: 203px" clearable v-model="selectProductCateValue"
+                         :options="productCateOptions"></el-cascader>
           </el-form-item>
           <el-form-item label="商品品牌：">
-            <el-select v-model="listQuery.brandId" placeholder="请选择品牌">
+            <el-select style="width: 203px" v-model="listQuery.brandId" placeholder="请选择品牌">
               <el-option v-for="item in brandOptions" :key="item.value" :label="item.label"
                          :value="item.value"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="上架状态：">
-            <el-select v-model="listQuery.publishStatus" placeholder="全部">
+            <el-select style="width: 203px" v-model="listQuery.publishStatus" placeholder="全部">
               <el-option v-for="item in publishStatusOptions" :key="item.value" :label="item.label"
                          :value="item.value"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="审核状态：">
-            <el-select v-model="listQuery.verifyStatus" placeholder="全部">
+            <el-select style="width: 203px" v-model="listQuery.verifyStatus" placeholder="全部">
               <el-option v-for="item in verifyStatusOptions" :key="item.value" :label="item.label"
                          :value="item.value"></el-option>
             </el-select>
@@ -40,7 +41,7 @@
       </div>
     </el-card>
     <el-card class="operate-container" shadow="never">
-      <i class="el-icon-tickets"></i>
+      <i class="el-icon-tickets" style="margin-right: 4px"></i>
       <span>数据列表</span>
       <el-button class="btn-add" @click="handleAddProduct" size="mini">添加</el-button>
     </el-card>
@@ -104,7 +105,7 @@
         </el-table-column>
         <el-table-column label="审核状态" width="100">
           <template v-slot="scope">
-            <p>{{ scope.row.verifyStatus|verifyStatusFiler }}</p>
+            <p>{{ scope.row.verifyStatus|verifyStatusFilter }}</p>
             <p>
               <el-button type="text" @click="handleShowVerifyDetail(scope.$index,scope.row)">审核详情</el-button>
             </p>
@@ -118,7 +119,7 @@
             </p>
             <p>
               <el-button size="mini" @click="handleShowLog(scope.$index,scope.row)">日志</el-button>
-              <el-button size="mini" @click="handleDelete(scope.$index,scope.row)">删除</el-button>
+              <el-button size="mini" type="danger" @click="handleDelete(scope.$index,scope.row)">删除</el-button>
             </p>
           </template>
         </el-table-column>
@@ -145,7 +146,7 @@
       <span>商品货号：</span>
       <span>{{ editSkuInfo.productSn }}</span>
       <el-input placeholder="按sku编号搜索" v-model="editSkuInfo.keyword" size="small" style="width: 50%;margin-left: 20px">
-        <el-button icon="el-icon-search" @click="handleSearchEditSku"></el-button>
+        <el-button slot="append" icon="el-icon-search" @click="handleSearchEditSku"></el-button>
       </el-input>
       <el-table style="width: 100%;margin-top: 20px" :data="editSkuInfo.stockList" border>
         <el-table-column label="SKU编号">
@@ -371,7 +372,7 @@ export default {
       this.$confirm('是否要进行修改', '提示', {
         confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'
       }).then(() => {
-        updateSkuStockList(this.editSkuInfo.productId, this.editSkuInfo.stockList).then(() => {
+        updateSkuStockList(this.editSkuInfo.stockList).then(() => {
           this.$message({
             message: '修改成功',
             type: 'success',
@@ -475,19 +476,23 @@ export default {
         let ids = [];
         ids.push(row.id);
         this.updateDeleteStatus(1, ids);
+      }).catch(() => {
       })
     },
     handleUpdateProduct: function (index, row) {
       this.$router.push({path: '/pms/updateProduct', query: {id: row.id}});
     },
     handleShowProduct: function (index, row) {
-      this.$message('unimplemented', row);
+      this.$message({message: 'unimplemented', type: 'warning', duration: 1000});
+      console.log(index, row);
     },
     handleShowVerifyDetail: function (index, row) {
-      this.$message('unimplemented', row);
+      this.$message({message: 'unimplemented', type: 'warning', duration: 1000});
+      console.log(index, row);
     },
     handleShowLog: function (index, row) {
-      this.$message('unimplemented', row);
+      this.$message({message: 'unimplemented', type: 'warning', duration: 1000});
+      console.log(index, row);
     },
     updatePublishStatus: function (publishStatus, ids) {
       let params = new URLSearchParams();

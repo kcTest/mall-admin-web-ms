@@ -8,9 +8,9 @@ export function fetchList(pid, params) {
     })
 }
 
-export function update(pid, data) {
+export function update(data) {
     return request({
-        url: '/sku/update/' + pid,
+        url: '/sku/update/',
         method: 'post',
         data: data
     });
