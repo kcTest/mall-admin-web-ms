@@ -25,7 +25,9 @@ export default {
     minioHeader: function () {
       return {Authorization: this.$store.getters.token};
     },
-    imageUrl: this.value,
+    imageUrl: function () {
+      return this.value;
+    },
     imageName: function () {
       if (this.value != null && this.value !== '') {
         return this.value.substr(this.value.lastIndexOf('/') + 1);

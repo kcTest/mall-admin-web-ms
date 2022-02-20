@@ -1,8 +1,6 @@
 let callbacks = []
 
 function loadedTinymce() {
-    // to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2144
-    // check is successfully downloaded script
     return window.tinymce
 }
 
@@ -49,7 +47,7 @@ const dynamicLoadScript = (src, callback) => {
             if (this.readyState !== 'complete' && this.readyState !== 'loaded') return
             this.onreadystatechange = null
             for (const cb of callbacks) {
-                cb(null, script) // there is no way to catch loading errors in IE8
+                cb(null, script)
             }
             callbacks = null
         }
