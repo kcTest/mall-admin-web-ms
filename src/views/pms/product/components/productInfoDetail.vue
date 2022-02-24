@@ -1,43 +1,44 @@
 <template>
   <div style="margin-top: 50px">
     <el-form :model="value" :rules="rules" ref="productInfoForm" label-width="120px" style="width: 600px" size="small">
-      <el-form-item label="商品分类" prop="productCategoryId">
-        <el-cascader v-model="selectProductCateValue" :options="productCateOptions"></el-cascader>
+      <el-form-item label="商品分类：" prop="productCategoryId">
+        <el-cascader ref="casCate" v-model="selectProductCateValue" filterable
+                     :options="productCateOptions"></el-cascader>
       </el-form-item>
-      <el-form-item label="商品名称" prop="name">
+      <el-form-item label="商品名称：" prop="name">
         <el-input v-model="value.name"></el-input>
       </el-form-item>
-      <el-form-item label="副标题" prop="subTitle">
+      <el-form-item label="副标题：" prop="subTitle">
         <el-input v-model="value.subTitle"></el-input>
       </el-form-item>
-      <el-form-item label="商品品牌" prop="brandId">
+      <el-form-item label="商品品牌：" prop="brandId">
         <el-select v-model="value.brandId" @change="handleBrandChange" placeholder="请选择品牌">
           <el-option v-for="item in brandOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="商品介绍">
+      <el-form-item label="商品介绍：">
         <el-input :autosize="true" v-model="value.description" type="textarea" placeholder="请输入内容"></el-input>
       </el-form-item>
-      <el-form-item label="商品货号">
+      <el-form-item label="商品货号：">
         <el-input v-model="value.productSn"></el-input>
       </el-form-item>
-      <el-form-item label="商品售价">
+      <el-form-item label="商品售价：">
         <el-input v-model="value.price"></el-input>
       </el-form-item>
-      <el-form-item label="市场价">
+      <el-form-item label="市场价：">
         <el-input v-model="value.originalPrice"></el-input>
       </el-form-item>
-      <el-form-item label="商品库存">
+      <el-form-item label="商品库存：">
         <el-input v-model="value.stock"></el-input>
       </el-form-item>
-      <el-form-item label="计量单位">
+      <el-form-item label="计量单位：">
         <el-input v-model="value.unit"></el-input>
       </el-form-item>
-      <el-form-item label="商品重量">
+      <el-form-item label="商品重量：">
         <el-input v-model="value.weight" style="width: 300px"></el-input>
         <span style="margin-left: 20px">克</span>
       </el-form-item>
-      <el-form-item label="排序">
+      <el-form-item label="排序：">
         <el-input v-model="value.sort"></el-input>
       </el-form-item>
       <el-form-item style="text-align: center">
@@ -78,8 +79,8 @@ export default {
     }
   },
   created() {
-    this.getBrandList();
     this.getProductCateList();
+    this.getBrandList();
   },
   computed: {
     productId: function () {
@@ -97,7 +98,7 @@ export default {
       if (newValue === undefined || newValue == null || newValue === 0) {
         return;
       }
-      this.handelEditCreated();
+      this.handleEditCreated();
     },
     selectProductCateValue: function (newValue) {
       if (newValue != null && newValue.length === 2) {
@@ -115,6 +116,7 @@ export default {
       if (this.value.productCategoryId != null) {
         this.selectProductCateValue.push(this.value.cateParentId);
         this.selectProductCateValue.push(this.value.productCategoryId);
+        this.$refs.casCate.computePresentContent();
       }
       this.hasEditCreated = true;
     },
@@ -123,14 +125,14 @@ export default {
         let list = response.data;
         this.productCateOptions = [];
         for (let i = 0; i < list.length; i++) {
+          let parent = list[i];
           let children = [];
-          let currentChildren = list[i];
-          if (currentChildren.childen != null && currentChildren.childen.length > 0) {
-            for (let j = 0; j < currentChildren.childen.length; j++) {
-              children.push({label: currentChildren.childen[j].name, value: currentChildren.childen[j].id});
+          if (parent.children != null && parent.children.length > 0) {
+            for (let j = 0; j < parent.children.length; j++) {
+              children.push({label: parent.children[j].name, value: parent.children[j].id});
             }
           }
-          this.productCateOptions.push({label: currentChildren.name, value: currentChildren.id, children: children});
+          this.productCateOptions.push({label: parent.name, value: parent.id, children: children});
         }
       })
     },
@@ -146,9 +148,9 @@ export default {
     getCateNameById: function (id) {
       let name = null;
       for (let i = 0; i < this.productCateOptions.length; i++) {
-        for (let j = 0; j < this.productCateOptions[i].childen.length; j++) {
+        for (let j = 0; j < this.productCateOptions[i].children.length; j++) {
           if (this.productCateOptions[i].children[j].value === id) {
-            name = this.productCateOptions[i].childen[j].label;
+            name = this.productCateOptions[i].children[j].label;
             return name;
           }
         }

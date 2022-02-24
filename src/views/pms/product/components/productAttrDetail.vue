@@ -10,8 +10,8 @@
       </el-form-item>
       <el-form-item label="商品规格：">
         <el-card shadow="never" class="cardBg">
-          <div v-for="(productAttr,idx) in selectProductAttr" :key="productAttr">
-            {{ productAttr.name }}
+          <div v-for="(productAttr,idx) in selectProductAttr" :key="productAttr.id">
+            {{ productAttr.name }}：
             <el-checkbox-group v-if="productAttr.handAddStatus===0" v-model="selectProductAttr[idx].values">
               <el-checkbox v-for="item in getInputListArr(productAttr.inputList)" :label="item" :key="item"
                            class="littleMarginLeft">
@@ -26,14 +26,13 @@
                   </el-button>
                 </div>
               </el-checkbox-group>
-              <el-input v-mode="addProductAttrValue" style="width: 160px;margin-right: 10px" clearable></el-input>
+              <el-input v-model="addProductAttrValue" style="width: 160px;margin-left: 10px" clearable></el-input>
               <el-button class="littleMarginLeft" @click="handleAddProductAttrValue(idx)">增加</el-button>
             </div>
           </div>
         </el-card>
         <el-table style="width: 100%;margin-top: 20px" :data="value.skuStockList" border
-                  :cell-style="{'text-align':'center'}"
-                  :header-cell-style="{'text-align':'center'}">
+                  :cell-style="{'text-align':'center'}" :header-cell-style="{'text-align':'center'}">
           <el-table-column v-for="(item,index) in selectProductAttr" :label="item.name" :key="item.id">
             <template v-slot="scope">{{ getProductSkuSp(scope.row, index) }}</template>
           </el-table-column>
@@ -47,7 +46,7 @@
               <el-input v-model="scope.row.stock"></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="库存预警值" width="80">
+          <el-table-column label="库存预警值" width="100">
             <template v-slot="scope">
               <el-input v-model="scope.row.lowStock"></el-input>
             </template>
@@ -69,7 +68,7 @@
       </el-form-item>
       <el-form-item label="属性图片：" v-if="hasAttrPic">
         <el-card shadow="never" class="cardBg">
-          <div v-for="(item) in selectProductAttrPics" :key="item">
+          <div v-for="(item) in selectProductAttrPics" :key="item.name">
             <span>{{ item.name }}:</span>
             <single-upload v-model="item.pic"
                            style="width: 300px;display: inline-block;margin-left:10px"></single-upload>
@@ -77,9 +76,9 @@
         </el-card>
       </el-form-item>
       <el-form-item label="商品参数：">
-        <el-card shadow="never" class="cardbg">
-          <div v-for="(item,index) in selectProductParam" :class="{littleMarginTop:index!==0}" :key="item">
-            <div class="paramInputLabel">{{ item.name }}</div>
+        <el-card shadow="never" class="cardBg">
+          <div v-for="(item,index) in selectProductParam" :class="{littleMarginTop:index!==0}" :key="item.name">
+            <div class="paramInputLabel">{{ item.name }}:</div>
             <el-select v-if="item.inputType===1" class="paramInput" v-model="selectProductParam[index].value">
               <el-option v-for="item in getParamInputList(item.inputList)" :key="item" :label="item"
                          :value="item"></el-option>
@@ -102,8 +101,8 @@
         </el-tabs>
       </el-form-item>
       <el-form-item style="text-align: center">
-        <el-button size="medium" @click="handlePrev">上一步,填写商品促销</el-button>
-        <el-button type="primary" size="medium" @click="handleNext">下一步,选择商品关联</el-button>
+        <el-button size="medium" @click="handlePrev">上一步，填写商品促销</el-button>
+        <el-button type="primary" size="medium" @click="handleNext">下一步，选择商品关联</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -147,10 +146,7 @@ export default {
   computed: {
     //是否有商品属性图片
     hasAttrPic: function () {
-      if (this.selectProductAttrPics.length < 1) {
-        return false;
-      }
-      return true;
+      return this.selectProductAttrPics.length >= 1;
     },
     //商品编号
     productId: function () {
@@ -224,22 +220,23 @@ export default {
         this.productAttrbuteCategoryOptions = [];
         let list = response.data.list;
         for (let i = 0; i < list.length; i++) {
-          this.productAttrbuteCategoryOptions.push({label: list[i].name, value: list[i].id});
+          this.productAttributeCategoryOptions.push({label: list[i].name, value: list[i].id});
         }
       })
     },
     getProductAttrList: function (type, cid) {
+      //初始化指定产品的属性及参数
       let param = {pageNum: 1, pageSize: 100, type: type};
       fetchProductAttrList(cid, param).then(response => {
         let list = response.data.list;
-        if (type == 0) {
+        if (type === 0) {
           this.selectProductAttr = [];
           for (let i = 0; i < list.length; i++) {
             let options = [];
             let values = [];
             if (this.isEdit) {
-              if (list[i].hasAddStatus === 1) {
-                //编辑状态下手动获取添加编辑属性
+              if (list[i].handAddStatus === 1) {
+                //编辑状态下获取手动添加编辑属性
                 options = this.getEditAttrOptions(list[i].id);
               }
               //编辑状态下获取选中属性
@@ -248,7 +245,7 @@ export default {
             this.selectProductAttr.push({
               id: list[i].id,
               name: list[i].name,
-              handAddStatus: list[i].handAddStaus,
+              handAddStatus: list[i].handAddStatus,/*是否支持手动新增*/
               inputList: list[i].inputList,
               values: values,
               options: options
@@ -266,7 +263,7 @@ export default {
               //编辑模式下获取参数属性
               value = this.getEditParamValue(list[i].id);
             }
-            this.selectProductAttr.push({
+            this.selectProductParam.push({
               id: list[i].id,
               name: list[i].name,
               value: value,
@@ -275,11 +272,11 @@ export default {
             });
           }
         }
-      })
+      });
     },
     getEditAttrOptions: function (id) {
       let options = [];
-      for (let i = 0; i < this.value.productAttributeValueList.length.length; i++) {
+      for (let i = 0; i < this.value.productAttributeValueList.length; i++) {
         let attrValue = this.value.productAttributeValueList[i];
         if (attrValue.productAttributeId === id) {
           let strAttr = attrValue.value.split(',');
@@ -324,8 +321,8 @@ export default {
     //获取属性的值
     getEditParamValue: function (id) {
       for (let i = 0; i < this.value.productAttributeValueList.length; i++) {
-        if (id === this.value.productAttributeValueList[i].productAttributedId) {
-          return this.value.productAttrbuteValueList[i].value;
+        if (id === this.value.productAttributeValueList[i].productAttributeId) {
+          return this.value.productAttributeValueList[i].value;
         }
       }
     },
@@ -361,6 +358,7 @@ export default {
       }
     },
     handleRefreshProductSkuList: function () {
+      //组合属性 生成spData
       this.$confirm('刷新列表将导致sku信息重新生成，是否要刷新', '提示', {
         confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'
       }).then(() => {
@@ -392,7 +390,7 @@ export default {
           let tempSkuList = [];
           tempSkuList = tempSkuList.concat(tempSkuList, this.value.skuStockList);
           let stock = this.value.skuStockList[0].stock;
-          let lowStock = this.value.skuStockList[0].stock;
+          let lowStock = this.value.skuStockList[0].lowStock;
           for (let i = 0; i < tempSkuList.length; i++) {
             tempSkuList[i].stock = stock;
             tempSkuList[i].lowStock = lowStock;
@@ -495,7 +493,7 @@ export default {
       this.value.productAttributeValueList = [];
       for (let i = 0; i < this.selectProductAttr.length; i++) {
         let attr = this.selectProductAttr[i];
-        if (attr.handAddStatus == 1 && attr.options != null && attr.options.length > 0) {
+        if (attr.handAddStatus === 1 && attr.options != null && attr.options.length > 0) {
           this.value.productAttributeValueList.push({
             productAttributeId: attr.id,
             value: this.getOptionStr(attr.options)
@@ -548,6 +546,7 @@ export default {
     handleNext: function () {
       this.mergeProductAttrValue();
       this.mergeProductAttrPics();
+      console.log(this.selectProductAttr);
       this.$emit('nextStep');
     },
   }
@@ -557,7 +556,7 @@ export default {
 
 <style scoped>
 .littleMarginLeft {
-  margin-top: 10px;
+  margin-left: 10px;
 }
 
 .littleMarginTop {

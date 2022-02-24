@@ -41,8 +41,12 @@ export default {
         url: this.imageUrl
       }]
     },
-    showFileList: function () {
-      return this.value !== null && this.value !== '' && this.value !== undefined;
+    showFileList: {
+      get: function () {
+        return this.value !== null && this.value !== '' && this.value !== undefined;
+      },
+      set: function () {
+      }
     }
   },
   data: function () {

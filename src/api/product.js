@@ -50,7 +50,7 @@ export function createProduct(data) {
 
 export function updateProduct(id, data) {
     return request({
-        url: '/product/update' + id,
+        url: '/product/update/' + id,
         method: 'post',
         data: data
     })
@@ -58,7 +58,7 @@ export function updateProduct(id, data) {
 
 export function getProduct(id) {
     return request({
-        url: '/product/updateInfo' + id,
+        url: '/product/updateInfo/' + id,
         method: 'get'
     })
 }

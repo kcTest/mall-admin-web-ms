@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-upload :action="useOss?ossUploadUrl:minioUploadUrl" :data="useOss?dataObj:null"
-               :headers="useOss?null:minioHeader" list-type="picture-card" :file-list="showFileList"
+               :headers="useOss?null:minioHeader" list-type="picture-card" :file-list="fileList"
                :before-upload="beforeUpload" :on-remove="handleRemove"
                :on-success="handleUploadSuccess" :on-preview="handlePreview" :limit="maxCount"
                :on-exceed="handleExceed">
@@ -57,7 +57,7 @@ export default {
     emitInput: function (fileList) {
       let value = [];
       for (let i = 0; i < fileList.length; i++) {
-        value.push(fileList.url);
+        value.push(fileList[i].url);
       }
       this.$emit('input', value);
     },
@@ -91,14 +91,12 @@ export default {
       });
     },
     handleUploadSuccess: function (res, file) {
-      this.showFileList = true;
-      this.fileList.pop();
       let url = this.dataObj.host + '/' + this.dataObj.dir + '/' + file.name;
       if (!this.useOss) {
         url = res.data.url;
       }
       this.fileList.push({name: file.name, url: url});
-      this.emitInput(this.fileList[0].url);
+      this.emitInput(this.fileList);
     },
     handleExceed: function () {
       this.$message({message: '最多只能上传' + this.maxCount + '张图片', type: 'warning', duration: 1000});

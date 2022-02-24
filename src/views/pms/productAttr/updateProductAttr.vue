@@ -1,10 +1,12 @@
 <template>
-  <div>updateProductAttr</div>
+  <product-attr-detail :is-edit="true"></product-attr-detail>
 </template>
 
 <script>
+import ProductAttrDetail from "@/views/pms/productAttr/components/productAttrDetail";
+
 export default {
-  name: "productAttrList"
+  components: {ProductAttrDetail}
 }
 </script>
 

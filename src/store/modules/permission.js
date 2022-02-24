@@ -11,8 +11,8 @@ const permission = {
                 const menus = data.menus;
                 const accessRouters = asyncRouterMap.filter(route => {
                     if (hasPermission(menus, route, 0)) {
-                        if (route.childen && route.children.length > 0) {
-                            route.childen = route.childen.filter(child => {
+                        if (route.children && route.children.length > 0) {
+                            route.children = route.children.filter(child => {
                                 if (hasPermission(menus, child, 1)) {
                                     return child;
                                 }

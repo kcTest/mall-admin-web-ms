@@ -11,10 +11,10 @@
         <el-input v-model="value.usePointLimit"></el-input>
       </el-form-item>
       <el-form-item label="预告商品：">
-        <el-switch v-model="value.preViewStatus" :active-value="1" :inactive-value="0"></el-switch>
+        <el-switch v-model="value.previewStatus" :active-value="1" :inactive-value="0"></el-switch>
       </el-form-item>
       <el-form-item label="商品上架：">
-        <el-switch v-model="value.ppublishStatus" :active-value="1" :inactive-value="0"></el-switch>
+        <el-switch v-model="value.publishStatus" :active-value="1" :inactive-value="0"></el-switch>
       </el-form-item>
       <el-form-item label="商品推荐：">
         <span style="margin-right: 10px">新品</span>
@@ -32,19 +32,19 @@
       <el-form-item label="详细页标题：">
         <el-input v-model="value.detailTitle"></el-input>
       </el-form-item>
-      <el-form-item label="详细页描述">
+      <el-form-item label="详细页描述：">
         <el-input v-model="value.detailDesc"></el-input>
       </el-form-item>
-      <el-form-item label="商品关键字">
+      <el-form-item label="商品关键字：">
         <el-input v-model="value.keywords"></el-input>
       </el-form-item>
-      <el-form-item label="商品备注">
+      <el-form-item label="商品备注：">
         <el-input v-model="value.note" type="textarea" :autosize="true"></el-input>
       </el-form-item>
-      <el-form-item label="选择优惠方式">
+      <el-form-item label="选择优惠方式：">
         <el-radio-group v-model="value.promotionType" size="small">
           <el-radio-button :label="0">无优惠</el-radio-button>
-          <el-radio-button :label="1">优惠促销</el-radio-button>
+          <el-radio-button :label="1">特惠促销</el-radio-button>
           <el-radio-button :label="2">会员价格</el-radio-button>
           <el-radio-button :label="3">阶梯价格</el-radio-button>
           <el-radio-button :label="4">满级价格</el-radio-button>
@@ -53,13 +53,13 @@
       <el-form-item v-show="value.promotionType===1">
         <div>
           开始时间：
-          <el-date-picker v-model="value.promotionStartTime" type="dateTime" :picker-options="pickerOptions1"
+          <el-date-picker v-model="value.promotionStartTime" type="datetime" :picker-options="pickerOptions1"
                           placeholder="选择开始时间">
           </el-date-picker>
         </div>
-        <div>
-          开始时间：
-          <el-date-picker v-model="value.promotionEndTime" type="dateTime" :picker-options="pickerOptions1"
+        <div class="littleMargin">
+          结束时间：
+          <el-date-picker v-model="value.promotionEndTime" type="datetime" :picker-options="pickerOptions1"
                           placeholder="选择结束时间">
           </el-date-picker>
         </div>
@@ -77,7 +77,7 @@
       <el-form-item v-show="value.promotionType===3">
         <el-table :data="value.productLadderList" style="width: 80%" border :cell-style="{'text-align':'center'}"
                   :header-cell-style="{'text-align':'center'}">
-          <el-table-column :label="数量" width="120">
+          <el-table-column label="数量" width="120">
             <template v-slot="scope">
               <el-input v-model="scope.row.count"></el-input>
             </template>
@@ -98,7 +98,7 @@
       <el-form-item v-show="value.promotionType===4">
         <el-table :data="value.productFullReductionList" style="width: 80%" border :cell-style="{'text-align':'center'}"
                   :header-cell-style="{'text-align':'center'}">
-          <el-table-column :label="满" width="120">
+          <el-table-column label="满" width="120">
             <template v-slot="scope">
               <el-input v-model="scope.row.fullPrice"></el-input>
             </template>
@@ -158,32 +158,30 @@ export default {
     }
   },
   computed: {
-    selectServiceList: function () {
-      return {
-        get: function () {
-          let list = [];
-          if (this.value.serviceIds === undefined || this.value.serviceIds == null || this.value.serviceIds === '') {
-            return list;
-          }
-          let ids = this.value.serviceIds.split(',');
-          for (let i = 0; i < ids.length; i++) {
-            list.push(Number(ids[i]));
-          }
+    selectServiceList: {
+      get: function () {
+        let list = [];
+        if (this.value.serviceIds === undefined || this.value.serviceIds == null || this.value.serviceIds === '') {
           return list;
-        },
-        set: function (newValue) {
-          let serviceIds = '';
-          if (newValue != null && newValue.length > 0) {
-            for (let i = 0; i < newValue.length; i++) {
-              serviceIds += newValue[i] + ',';
-            }
-            if (serviceIds.endsWith(',')) {
-              serviceIds = serviceIds.substr(0, serviceIds.length - 1);
-            }
-            this.value.serviceIds = serviceIds;
-          } else {
-            this.value.serviceIds = null;
+        }
+        let ids = this.value.serviceIds.split(',');
+        for (let i = 0; i < ids.length; i++) {
+          list.push(Number(ids[i]));
+        }
+        return list;
+      },
+      set: function (newValue) {
+        let serviceIds = '';
+        if (newValue != null && newValue.length > 0) {
+          for (let i = 0; i < newValue.length; i++) {
+            serviceIds += newValue[i] + ',';
           }
+          if (serviceIds.endsWith(',')) {
+            serviceIds = serviceIds.substr(0, serviceIds.length - 1);
+          }
+          this.value.serviceIds = serviceIds;
+        } else {
+          this.value.serviceIds = null;
         }
       }
     }
