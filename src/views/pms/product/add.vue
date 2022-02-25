@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ProductDetail from "./components/productDetail";
+import ProductDetail from "./components/ProductDetail";
 
 export default {
   components: {ProductDetail}

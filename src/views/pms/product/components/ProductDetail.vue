@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import ProductInfoDetail from './productInfoDetail';
-import ProductSaleDetail from './productSaleDetail';
-import ProductAttrDetail from './productAttrDetail';
-import ProductRelationDetail from "./productRelationDetail";
+import ProductInfoDetail from './ProductInfoDetail';
+import ProductSaleDetail from './ProductSaleDetail';
+import ProductAttrDetail from './ProductAttrDetail';
+import ProductRelationDetail from "./ProductRelationDetail";
 
 import {createProduct, updateProduct, getProduct} from "@/api/product";
 

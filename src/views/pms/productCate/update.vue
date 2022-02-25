@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ProductCateDetail from "@/views/pms/productCate/components/productCateDetail";
+import ProductCateDetail from "@/views/pms/productCate/components/ProductCateDetail";
 
 export default {
   components: {ProductCateDetail}

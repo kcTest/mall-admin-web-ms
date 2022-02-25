@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ProductAttrDetail from "@/views/pms/productAttr/components/productAttrDetail";
+import ProductAttrDetail from "@/views/pms/productAttr/components/ProductAttrDetail";
 
 export default {
   components: {ProductAttrDetail}

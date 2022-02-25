@@ -1,10 +1,13 @@
 <template>
-<div>add brand</div>
+  <brand-detail :is-edit="false"></brand-detail>
 </template>
 
 <script>
+import BrandDetail from "@/views/pms/brand/components/BrandDetail";
+
 export default {
-  name: "index"
+  name: "index",
+  components: {BrandDetail}
 }
 </script>
 
