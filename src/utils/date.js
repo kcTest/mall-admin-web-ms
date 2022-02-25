@@ -1,5 +1,6 @@
 export function formatDate(date, fmt) {
     if (/(y+)/.test(fmt)) {
+        //$1 和 $2 表示正则表达式中的括号匹配项的结果
         fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
     }
     let o = {
@@ -29,13 +30,12 @@ export function str2Data(dateStr, separator) {
     let dateArr = dateStr.split(separator);
     let year = parseInt(dateArr[0]);
     let month;
-    if (dateArr[1].indexOf("0") == 0) {
+    if (dateArr[1].indexOf("0") === 0) {
         month = parseInt(dateArr[1].substring(1));
     } else {
         month = parseInt(dateArr[1]);
     }
     let day = parseInt(dateArr[2]);
     //monthIndex 表示月份的整数值，从 0（1月）到 11（12月）。
-    let date = new Date(year, month - 1, day);
-    return date;
+    return new Date(year, month - 1, day);
 }
