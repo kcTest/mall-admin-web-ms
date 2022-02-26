@@ -263,13 +263,13 @@ export default {
       this.closeOrder.orderIds = [row.id];
     },
     handleDeliveryOrder: function (index, row) {
-      let listItem = this.coverOrder(row);
-      this.$router.push({path: '/oms/deliveryOrderList', query: {list: listItem}});
+      let listItem = this.covertOrder(row);
+      this.$router.push({path: '/oms/deliveryOrderList', query: {list: [listItem]}});
     },
-    coverOrder: function (order) {
+    covertOrder: function (order) {
       let address = order.receiverProvince + order.receiverCity + order.receiverRegion + order.receiverDetailAddress;
       return {
-        orderId: order.Id,
+        orderId: order.id,
         orderSn: order.orderSn,
         receiverName: order.receiverName,
         receiverPhone: order.receiverPhone,

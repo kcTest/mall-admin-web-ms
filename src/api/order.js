@@ -1,5 +1,13 @@
 import request from "@/utils/request";
 
+export function deliveryOrder(data) {
+    return request({
+        url: '/order/update/delivery',
+        method: 'post',
+        data: data
+    });
+}
+
 export function updateOrderNote(params) {
     return request({
         url: '/order/update/note',
@@ -7,7 +15,6 @@ export function updateOrderNote(params) {
         params: params
     });
 }
-
 
 export function updateReceiverInfo(data) {
     return request({

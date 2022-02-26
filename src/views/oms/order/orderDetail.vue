@@ -23,7 +23,6 @@
         </div>
         <div class="operate-button-container" v-show="order.status===1">
           <el-button size="mini" @click="showUpdateReceiverDialog">修改收货人信息</el-button>
-          <el-button size="mini">修改商品信息</el-button>
           <el-button size="mini" @click="showMessageDialog">发送站内信</el-button>
           <el-button size="mini">取消订单</el-button>
           <el-button size="mini" @click="showMarkOrderDialog">备注订单</el-button>
@@ -456,6 +455,7 @@ export default {
         receiverPostCode: this.order.receiverPostCode,
         receiverDetailAddress: this.order.receiverDetailAddress,
         receiverProvince: this.order.receiverProvince,
+        receiverCity: this.order.receiverCity,
         receiverRegion: this.order.receiverRegion,
         status: this.order.status
       }
