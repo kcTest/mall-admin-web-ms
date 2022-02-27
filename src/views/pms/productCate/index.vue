@@ -26,14 +26,14 @@
         <el-table-column label="导航栏" width="100">
           <template v-slot="scope">
             <el-switch @change="handleNavStatusChange(scope.$index,scope.row)" :active-value="1"
-                       inactive-value="0" v-model="scope.row.navStatus">
+                       :inactive-value="0" v-model="scope.row.navStatus">
             </el-switch>
           </template>
         </el-table-column>
         <el-table-column label="是否显示" width="100">
           <template v-slot="scope">
             <el-switch @change="handleShowStatusChange(scope.$index,scope.row)" :active-value="1"
-                       inactive-value="0" v-model="scope.row.showStatus">
+                       :inactive-value="0" v-model="scope.row.showStatus">
             </el-switch>
           </template>
         </el-table-column>
