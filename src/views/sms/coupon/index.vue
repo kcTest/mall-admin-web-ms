@@ -128,9 +128,6 @@ export default {
     handleAdd: function () {
       this.$router.push({path: '/sms/addCoupon'});
     },
-    handleShowSessionList: function () {
-      this.$router.push({path: '/sms/flashSession'});
-    },
     handleView: function (index, row) {
       this.$router.push({path: '/sms/couponHistory', query: {id: row.id}});
     },

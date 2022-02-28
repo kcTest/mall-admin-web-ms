@@ -1,9 +1,12 @@
 <template>
-<div>update.vue</div>
+  <coupon-detail :is-edit="true"></coupon-detail>
 </template>
 
 <script>
+import CouponDetail from "./components/CouponDetail";
+
 export default {
+  components: {CouponDetail}
 }
 </script>
 

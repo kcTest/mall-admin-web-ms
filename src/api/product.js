@@ -1,5 +1,14 @@
 import request from "@/utils/request";
 
+export function fetchSimpleList(params) {
+    return request({
+        url: '/product/simpleList',
+        method: 'get',
+        params: params
+    })
+}
+
+
 export function fetchList(params) {
     return request({
         url: '/product/list',
