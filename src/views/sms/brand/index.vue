@@ -259,7 +259,8 @@ export default {
       this.getList();
     },
     handleBatchOperate: function () {
-      if (this.multiSelection < 1) {
+      // console.log(0 == []); // true
+      if (this.multiSelection.length < 1) {
         this.$message({message: '请选择一条记录', type: 'warning', duration: 1000});
         return;
       }
@@ -281,6 +282,7 @@ export default {
       }
     },
     handleSelectSearch: function () {
+      this.dialogData.listQuery.pageNum = 1;
       this.getDialogList();
     },
     getDialogList: function () {
