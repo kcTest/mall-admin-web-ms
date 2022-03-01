@@ -61,7 +61,7 @@ export default {
       loading: false,
       pwdType: 'password',
       loginForm: {
-        username: '#409eff',
+        username: '',
         password: ''
       },
       loginRules: {

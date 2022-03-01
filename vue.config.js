@@ -7,7 +7,7 @@ function resolve(dir) {
 
 module.exports = {
     devServer: {
-        port: 8180
+        port: 8090
     },
     chainWebpack(config) {
         config.module
