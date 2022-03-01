@@ -58,25 +58,25 @@
                 v-loading="listLoading" border>
         <el-table-column type="selection" width="60"></el-table-column>
         <el-table-column label="编号" width="120">
-          <template slot-scope="scope">{{ scope.row.id }}</template>
+          <template v-slot="scope">{{ scope.row.id }}</template>
         </el-table-column>
         <el-table-column label="广告名称">
-          <template slot-scope="scope">{{ scope.row.name }}</template>
+          <template v-slot="scope">{{ scope.row.name }}</template>
         </el-table-column>
         <el-table-column label="广告位置" width="120">
-          <template slot-scope="scope">{{ scope.row.type | formatType }}</template>
+          <template v-slot="scope">{{ scope.row.type | formatType }}</template>
         </el-table-column>
         <el-table-column label="广告图片" width="120">
-          <template slot-scope="scope"><img style="height: 80px" :src="scope.row.pic"></template>
+          <template v-slot="scope"><img style="height: 80px" :src="scope.row.pic"></template>
         </el-table-column>
         <el-table-column label="时间" width="220">
-          <template slot-scope="scope">
+          <template v-slot="scope">
             <p>开始时间：{{ scope.row.startTime | formatTime }}</p>
             <p>到期时间：{{ scope.row.endTime | formatTime }}</p>
           </template>
         </el-table-column>
         <el-table-column label="上线/下线" width="120">
-          <template slot-scope="scope">
+          <template v-slot="scope">
             <el-switch
                 @change="handleUpdateStatus(scope.$index, scope.row)"
                 :active-value="1"
@@ -86,13 +86,13 @@
           </template>
         </el-table-column>
         <el-table-column label="点击次数" width="120">
-          <template slot-scope="scope">{{ scope.row.clickCount }}</template>
+          <template v-slot="scope">{{ scope.row.clickCount }}</template>
         </el-table-column>
         <el-table-column label="生成订单" width="120">
-          <template slot-scope="scope">{{ scope.row.orderCount }}</template>
+          <template v-slot="scope">{{ scope.row.orderCount }}</template>
         </el-table-column>
         <el-table-column label="操作" width="120">
-          <template slot-scope="scope">
+          <template v-slot="scope">
             <el-button size="mini"
                        type="text"
                        @click="handleUpdate(scope.$index, scope.row)">编辑

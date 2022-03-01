@@ -48,13 +48,13 @@
                 v-loading="listLoading" border>
         <el-table-column type="selection" width="60"></el-table-column>
         <el-table-column label="编号" width="120">
-          <template slot-scope="scope">{{ scope.row.id }}</template>
+          <template v-slot="scope">{{ scope.row.id }}</template>
         </el-table-column>
         <el-table-column label="专题名称">
-          <template slot-scope="scope">{{ scope.row.subjectName }}</template>
+          <template v-slot="scope">{{ scope.row.subjectName }}</template>
         </el-table-column>
         <el-table-column label="是否推荐" width="200">
-          <template slot-scope="scope">
+          <template v-slot="scope">
             <el-switch
                 @change="handleRecommendStatusStatusChange(scope.$index, scope.row)"
                 :active-value="1"
@@ -64,13 +64,13 @@
           </template>
         </el-table-column>
         <el-table-column label="排序" width="160">
-          <template slot-scope="scope">{{ scope.row.sort }}</template>
+          <template v-slot="scope">{{ scope.row.sort }}</template>
         </el-table-column>
         <el-table-column label="状态" width="160">
-          <template slot-scope="scope">{{ scope.row.recommendStatus | formatRecommendStatus }}</template>
+          <template v-slot="scope">{{ scope.row.recommendStatus | formatRecommendStatus }}</template>
         </el-table-column>
         <el-table-column label="操作" width="180">
-          <template slot-scope="scope">
+          <template v-slot="scope">
             <el-button size="mini"
                        type="text"
                        @click="handleEditSort(scope.$index, scope.row)">设置排序
@@ -126,13 +126,13 @@
                 @selection-change="handleDialogSelectionChange" border>
         <el-table-column type="selection" width="60"></el-table-column>
         <el-table-column label="专题名称">
-          <template slot-scope="scope">{{ scope.row.title }}</template>
+          <template v-slot="scope">{{ scope.row.title }}</template>
         </el-table-column>
         <el-table-column label="所属分类" width="160">
-          <template slot-scope="scope">{{ scope.row.categoryName }}</template>
+          <template v-slot="scope">{{ scope.row.categoryName }}</template>
         </el-table-column>
         <el-table-column label="添加时间" width="160">
-          <template slot-scope="scope">{{ scope.row.createTime | formatTime }}</template>
+          <template v-slot="scope">{{ scope.row.createTime | formatTime }}</template>
         </el-table-column>
       </el-table>
       <div class="pagination-container">
