@@ -1,8 +1,10 @@
 import request from "@/utils/request";
 
-export function fetchListAll() {
+
+export function fetchList(params) {
     return request({
-        url: '/subject/listAll',
-        method: 'get'
-    });
+        url:'/subject/list',
+        method:'get',
+        params:params
+    })
 }

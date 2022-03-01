@@ -33,11 +33,11 @@ export function updateNewStatus(params) {
     })
 }
 
-export function updateRecommendStatus(params) {
+export function updateRecommendStatus(data) {
     return request({
         url: '/product/update/recommendStatus',
         method: 'post',
-        params: params
+        data: data
     })
 }
 

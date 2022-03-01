@@ -1,10 +1,13 @@
 <template>
-<div>update advertise</div>
+  <home-advertise-detail :is-edit="true"></home-advertise-detail>
+
 </template>
 
 <script>
+import HomeAdvertiseDetail from "@/views/sms/advertise/components/HomeAdvertiseDetail";
+
 export default {
-  name: "index"
+  components: {HomeAdvertiseDetail}
 }
 </script>
 
