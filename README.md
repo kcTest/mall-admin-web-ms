@@ -1,3 +1,8 @@
+
+```text
+References : https://github.com/macrozheng/mall
+```
+
 # mall-admin-web-ms
 
 ## Project setup
